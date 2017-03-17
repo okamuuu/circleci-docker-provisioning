@@ -9,5 +9,5 @@ make docker.keygen
 make docker.build
 make docker.start
 make docker.provision
-docker.test
+make docker.test
 ```
