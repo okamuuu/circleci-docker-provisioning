@@ -1,0 +1,19 @@
+machine:
+  python:
+    version: 2.7.10
+  services:
+    - docker
+
+dependencies:
+  pre:
+    - pip install ansible
+  override:
+    - docker info
+    - make docker.keygen
+    - docker build -t provisioning_sshd .
+
+test:
+  override:
+    - docker run -d -p 40122:22 provisioning_sshd
+    - make docker.provision.ci
+    - make docker.test
